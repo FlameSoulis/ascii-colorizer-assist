@@ -1,5 +1,5 @@
 import unittest
-from main import unique_symbols, generate_mask
+from ascii_colorizer_lib import unique_symbols, generate_mask
 
 class TestColorizerAssist(unittest.TestCase):
 	def test_unique_symbols(self):
