@@ -13,6 +13,14 @@ class TestColorizerAssist(unittest.TestCase):
 		results = unique_symbols(test)
 		assert len(results) == 4
 		assert results == ["a", "b", "c", "d"]
+	def test_generate_mask(self):
+		test = "   \n   abcd  \n   "
+		results = generate_mask(test)
+		assert results== "   \n   0000  \n   "
+	def test_generate_mask02(self):
+		test = "   \n   abcd  \n   "
+		results = generate_mask(test, True)
+		assert results== "   \n   1234  \n   "
 
 if __name__ == "__main__":
     unittest.main()

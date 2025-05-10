@@ -16,7 +16,7 @@ def generate_mask(ascii, use_index = False):
 	# Grab the unique symbols
 	symbols = unique_symbols(ascii)
 	for i,c in enumerate(symbols):
-		ascii = ascii.replace(c, str(i * use_index))
+		ascii = ascii.replace(c, str((i + 1) * use_index))
 	return ascii
 
 
