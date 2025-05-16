@@ -22,7 +22,34 @@ def error_msg(err_msg):
 	print_usage()
 
 def validate_param(param):
-	return []
+	# Lower everything
+	param = param.lower()
+	# Are we dealing with a - or --?
+	if param[0:1] == "--":
+		# Here comes the fun!
+		match param[2:]:
+			case "number":
+				return 0b0001
+			case "override":
+				return 0b0010
+			case "merge":
+				return 0b0100
+	elif param[0] == "-":
+		# Oh boy!
+		flags = 0
+		for c in param[1:]:
+			if c == "n":
+				flags |= 0b0001
+			elif c == "o":
+				flags |= 0b0010
+			elif c == "m":
+				flags |= 0b0100
+			else:
+				return False
+		return flags
+	else:
+		# Who are you?!
+		return False
 
 if __name__ == "__main__":
 	# If we don't have enough arguments, explain how to use
@@ -42,7 +69,7 @@ if __name__ == "__main__":
 	# Check the params
 	USE_INDEX = False
 	for i in range(1,len(sys.argv) - 1):
-		valid_params = validate_param(sys.argv[i])
-		if len(valid_params) == 0:
+		valid_param = validate_param(sys.argv[i])
+		if not valid_param:
 			error_msg(f"{sys.argv[i]} is not a valid parameter!")
 			sys.exit(3)
