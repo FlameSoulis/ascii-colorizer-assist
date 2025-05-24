@@ -55,15 +55,6 @@ def validate_param(param):
 		# Who are you?!
 		return False
 
-def generate_mask_file(source_file, use_index):
-	with open(source_file) as file_handle:
-		file_data = file_handle.read()
-		new_file_name = list(os.path.splitext(source_file))
-		new_file_name[0] += "_mask"
-		new_file_name = ''.join(new_file_name)
-		with open(new_file_name, 'w') as new_file_handle:
-			mask_data = generate_mask(file_data, use_index)
-			new_file_handle.write(mask_data)
 
 if __name__ == "__main__":
 	# If we don't have enough arguments, explain how to use
