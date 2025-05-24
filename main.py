@@ -1,6 +1,10 @@
 import sys, os
 from ascii_colorizer_lib import *
 
+USE_INDEX_NUMBERS 	= 0b0001
+ALLOW_OVERRIDE 		= 0b0010
+MERGE_MASK			= 0b0100
+
 def print_usage():
 	print("ASCII Colorizer Assist Tool")
 	print(f"Usage: {os.path.basename(__file__)} [options] file")
@@ -29,27 +33,37 @@ def validate_param(param):
 		# Here comes the fun!
 		match param[2:]:
 			case "number":
-				return 0b0001
+				return USE_INDEX_NUMBERS
 			case "override":
-				return 0b0010
+				return ALLOW_OVERRIDE
 			case "merge":
-				return 0b0100
+				return MERGE_MASK
 	elif param[0] == "-":
 		# Oh boy!
 		flags = 0
 		for c in param[1:]:
 			if c == "n":
-				flags |= 0b0001
+				flags |= USE_INDEX_NUMBERS
 			elif c == "o":
-				flags |= 0b0010
+				flags |= ALLOW_OVERRIDE
 			elif c == "m":
-				flags |= 0b0100
+				flags |= MERGE_MASK
 			else:
 				return False
 		return flags
 	else:
 		# Who are you?!
 		return False
+
+def generate_mask_file(source_file, use_index):
+	with open(source_file) as file_handle:
+		file_data = file_handle.read()
+		new_file_name = list(os.path.splitext(source_file))
+		new_file_name[0] += "_mask"
+		new_file_name = ''.join(new_file_name)
+		with open(new_file_name, 'w') as new_file_handle:
+			mask_data = generate_mask(file_data, use_index)
+			new_file_handle.write(mask_data)
 
 if __name__ == "__main__":
 	# If we don't have enough arguments, explain how to use
@@ -67,9 +81,13 @@ if __name__ == "__main__":
 		sys.exit(2)
 
 	# Check the params
-	USE_INDEX = False
+	FLAGS = 0
 	for i in range(1,len(sys.argv) - 1):
 		valid_param = validate_param(sys.argv[i])
 		if not valid_param:
 			error_msg(f"{sys.argv[i]} is not a valid parameter!")
 			sys.exit(3)
+		FLAGS |= valid_param
+
+	# Let's do this!
+	generate_mask_file(ascii_file, FLAGS & USE_INDEX_NUMBERS)
