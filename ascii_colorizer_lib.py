@@ -1,4 +1,11 @@
 import os
+
+def check_file(file_name):
+	if not os.path.exists(file_name):
+		raise Exception("does not exist")
+	if not os.path.isfile(file_name):
+		raise Exception("is not a file")
+
 def unique_symbols(ascii):
 	# Remove newlines and spaces
 	ascii = ascii.replace("\n", "")

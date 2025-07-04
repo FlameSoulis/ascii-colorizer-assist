@@ -64,11 +64,10 @@ if __name__ == "__main__":
 
 	# Does the file exist?
 	ascii_file = sys.argv[-1]
-	if not os.path.exists(ascii_file):
-		error_msg(f"{ascii_file} does not exist!")
-		sys.exit(2)
-	if not os.path.isfile(ascii_file):
-		error_msg(f"{ascii_file} is not a file!")
+	try:
+		check_file(ascii_file)
+	except Exception as e:
+		error_msg(f"{ascii_file} {e}")
 		sys.exit(2)
 
 	# Check the params
