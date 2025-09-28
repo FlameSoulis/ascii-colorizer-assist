@@ -80,4 +80,7 @@ if __name__ == "__main__":
 		FLAGS |= valid_param
 
 	# Let's do this!
-	generate_mask_file(ascii_file, FLAGS & USE_INDEX_NUMBERS)
+	if not (FLAGS & MERGE_MASK):
+		generate_mask_file(ascii_file, FLAGS & USE_INDEX_NUMBERS)
+	else:
+		merge_mask(ascii_file, ascii_file+"_mask")
