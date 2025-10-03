@@ -1,0 +1,47 @@
+{
+  //Art source: https://www.asciiarthub.com/
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "display",
+    "de",
+    "wm",
+    "wmtheme",
+    "theme",
+    "icons",
+    "font",
+    "cursor",
+    "terminal",
+    "terminalfont",
+    "cpu",
+    "gpu",
+    "memory",
+    "swap",
+    "disk",
+    "localip",
+    "battery",
+    "poweradapter",
+    "locale",
+    "break",
+    "colors"
+  ],
+  "logo": {
+    "source":"parrot_output.txt",
+    "type": "file",
+    "color": {
+      "1": "#f00",
+      "2": "#f08",
+      "4": "#6d6",
+      "5": "#ed0",
+      "6": "#15e",
+      "9": "#111"
+    }
+  }
+}
