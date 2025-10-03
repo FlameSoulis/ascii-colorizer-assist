@@ -3,6 +3,13 @@
 
 This script allows the creation of a numbered color guide from an ASCII art text file. This can then be merged back together, allowing easier complex coloring for fastfetch.
 
+#### Usage:
+```python main.py [options] path/to/ascii_art.txt```
+#### Options:
+- `-n, --number`: Generate a numeric mask with non-zero numeric indexes for each unique symbol
+- `-o, --override`: Force mask generation or merge, even if the file already exists
+- `-m, --merge`: Merges an existing mask with the source ASCII art file
+
 Project established in part of [Boot.dev](https://www.boot.dev?bannerlord=flamesoulis)'s course work.
 
 ## To Do
