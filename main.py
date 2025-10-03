@@ -82,6 +82,26 @@ if __name__ == "__main__":
 
     # Let's do this!
     if not (FLAGS & MERGE_MASK):
+        mask_file = generate_new_name(ascii_file, "mask")
+        try:
+            check_file(mask_file)
+        except Exception as e:
+            if e == "is not a file":
+                error_msg(f"{mask_file} is not a file!")
+                sys.exit(4)
+        if os.path.isfile(mask_file) and not (FLAGS & ALLOW_OVERRIDE):
+            error_msg("Mask file already exits! Use override flag or delete manually.")
+            sys.exit(4)
         generate_mask_file(ascii_file, FLAGS & USE_INDEX_NUMBERS)
     else:
+        output_file = generate_new_name(ascii_file, "mask")
+        try:
+            check_file(output_file)
+        except Exception as e:
+            if e == "is not a file":
+                error_msg(f"{output_file} is not a file!")
+                sys.exit(4)
+        if os.path.isfile(output_file) and not (FLAGS & ALLOW_OVERRIDE):
+            error_msg("Mask file already exits! Use override flag or delete manually.")
+            sys.exit(4)
         merge_mask(ascii_file)

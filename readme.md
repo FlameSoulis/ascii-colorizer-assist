@@ -7,8 +7,8 @@ Project established in part of [Boot.dev](https://www.boot.dev?bannerlord=flames
 
 ## To Do
 - [x] Complete merge_mask function
-- [ ] Be more compliant about file extensions
-- [ ] Address line size comparisons
+- [x] Be more compliant about file extensions
+- [x] Address line size comparisons
 - [ ] Use argparse
   * Simplifies validate_param
   * No point re-writing the wheel

@@ -27,26 +27,25 @@ def generate_mask(ascii, use_index = False):
         ascii = ascii.replace(c, str((i + 1) * use_index))
     return ascii
 
+def generate_new_name(source_file, new_name):
+    new_file_name = list(os.path.splitext(source_file))
+    new_file_name[0] += "_"+new_name
+    new_file_name = ''.join(new_file_name)
+    return new_file_name
+
 def generate_mask_file(source_file, use_index):
     with open(source_file, encoding="utf-8") as file_handle:
         file_data = file_handle.read()
-        new_file_name = list(os.path.splitext(source_file))
-        new_file_name[0] += "_mask"
-        new_file_name = ''.join(new_file_name)
+        new_file_name = generate_new_name(source_file, "mask")
         with open(new_file_name, 'w', encoding="utf-8") as new_file_handle:
             mask_data = generate_mask(file_data, use_index)
             new_file_handle.write(mask_data)
 
-
 def merge_mask(source_file):
     # get the mask's name
-    mask_file = list(os.path.splitext(source_file))
-    mask_file[0] += "_mask"
-    mask_file = ''.join(mask_file)
+    mask_file = generate_new_name(source_file, "mask")
     # generate the new filename for later
-    new_file_name = list(os.path.splitext(source_file))
-    new_file_name[0] += "_output"
-    new_file_name = ''.join(new_file_name)
+    new_file_name = generate_new_name(source_file, "output")
     # begin the loop
     with open(source_file, encoding="utf-8") as source_handle:
         with open(mask_file, encoding="utf-8") as mask_handle:
